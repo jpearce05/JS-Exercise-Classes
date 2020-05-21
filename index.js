@@ -40,9 +40,52 @@ class Airplane {
         + It should return a string with `name` and `age`. Example: "Mary, 50"
 */
 
-class Person {
+// re-write yesterday's project using Class
 
-}
+class Person {
+  constructor(name, age) {
+    this.name = name;
+    this.age = age;
+    this.stomach = [];
+
+    // assign attributes here
+
+  }
+
+  eat(food) {
+    if (this.stomach.length < 10) {
+      return this.stomach.push(food);
+    } // end of if 
+  } // end of eat
+
+  poop() {
+    if (this.stomach.length >= 10) {
+      return (this.stomach.splice(0, this.stomach.length));
+    }
+
+  } // end of poop
+
+  toString() {
+    return `${this.name}, ${this.age}`;
+  }
+
+} // closing Class Person
+
+
+// const mom = new Parent('mom', 'USA', 'Computer Scientist');
+const personOne = new Person('Mary', 50);
+
+
+
+// console.log(mom.job());
+
+personOne.eat();
+personOne.poop();
+personOne.toString();
+
+console.log(personOne);
+console.log(personOne.eat('pizza'));
+
 
 /*
   TASK 2
@@ -59,8 +102,42 @@ class Person {
 */
 
 class Car {
+  constructor(model, milesPerGallon) {
+    this.model = model;
+    this.milesPerGallon = milesPerGallon;
+    this.tank = 0;
+    this.odometer = 0;
 
-}
+  }
+
+  // add methods
+
+  fill(gallons) {
+    this.tank = gallons + this.tank;
+    return this.tank;
+  }
+
+  drive(distance) {
+    if (this.tank >= distance / this.milesPerGallon) {
+      this.odometer += distance;
+    } else {
+      let possibleMiles = this.milesPerGallon * this.tank;
+      distance = distance - possibleMiles;
+      this.odomoter = this.odomoter + distance;
+      return `I ran out of fuel at ${this.odometer} miles!`;
+    }
+
+  }
+
+}; // end class Car
+
+const carOne = new Car('ford', 20);
+carOne.fill(10);
+carOne.drive(20);
+// console.log(carOne);
+// console.log(carOne.fill);
+// console.log(carOne.drive);
+
 
 /*
   TASK 3
@@ -74,9 +151,48 @@ class Car {
         + Speaking should return a phrase `Hello my name is {name}, I am from {location}`.
         + {name} and {location} of course come from the instance's own properties.
 */
+// class Lambdasian {
+//   constructor (name, age, location) {
+//     this.name = name;
+//     this.age = age;
+//     this.location = location;
+//   }
+
+//   speak () {
+//     return `Hello my name is ${this.name}, I am from ${this.location}`
+//   }
+
+
+// } // end of class Lambda
+
+// let lambdaOne = new Lambdasian('Butrand', 32, 'New York');
+
+
+// version 2
+
 class Lambdasian {
+  constructor(object) {
+    this.name = object.name;
+    this.age = object.age;
+    this.location = object.location;
+  }
+
+  speak() {
+    return `Hello my name is ${this.name}, I am from ${this.location}`
+  }
 
 }
+
+let lambdaOne = new Lambdasian({
+  name: 'Bernie',
+  age: 32,
+  location: 'New York'
+
+
+}); // end of class Lambda
+
+// let lambdaOne = new Lambdasian('Butrand', 32, 'New York');
+
 
 /*
   TASK 4
@@ -92,9 +208,36 @@ class Lambdasian {
         + `demo` receives a `subject` string as an argument and returns the phrase 'Today we are learning about {subject}' where subject is the param passed in.
         + `grade` receives a `student` object and a `subject` string as arguments and returns '{student.name} receives a perfect score on {subject}'
 */
-class Instructor {
+class Instructor extends Lambdasian {
+  constructor(attributes) {
+    super(attributes);
+    this.specialty = attributes.specialty;
+    this.favLanguage = attributes.favLanguage;
+    this.catchPhrase = attributes.catchPhrase;
 
-}
+  } // end of constructor
+
+  demo(subject) {
+    return `Today we are learning about ${subject}`
+  }
+
+  grade(student, subject) {
+    return `${student} receives a perfect score on ${subject}`
+  }
+
+} // end of class Instructor extends
+
+const instructorOne = new Instructor({
+  name: 'Bernie',
+  age: 32,
+  location: 'New York',
+  specialty: 'React',
+  favLanguage: 'JavaScript',
+  catchPhrase: "Don't forget the homies"
+
+});
+
+// instructorOne();
 
 /*
   TASK 5
