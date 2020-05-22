@@ -227,17 +227,19 @@ class Instructor extends Lambdasian {
 
 } // end of class Instructor extends
 
-const instructorOne = new Instructor({
-  name: 'Bernie',
-  age: 32,
-  location: 'New York',
+const instructorOne = new Instructor ({
+  name: 'Frank',
+  age: 44,
+  location: 'Portland',
   specialty: 'React',
   favLanguage: 'JavaScript',
   catchPhrase: "Don't forget the homies"
 
 });
 
-// instructorOne();
+
+  console.log(instructorOne.demo(instructorOne.favLanguage));
+  console.log(instructorOne.grade(instructorOne.name, instructorOne.specialty));
 
 /*
   TASK 5
@@ -248,15 +250,63 @@ const instructorOne = new Instructor({
         + `className` i.e. CS132
         + `favSubjects`. i.e. an array of the student's favorite subjects ['HTML', 'CSS', 'JS']
     - The constructor calls the parent constructor passing to it what it needs.
+
     - The constructor should also initialize `previousBackground`, `className` and `favSubjects` properties on the instance.
     - Student instances have the following methods:
         + `listSubjects` a method that returns all of the student's favSubjects in a single string: `Loving HTML, CSS, JS!`.
         + `PRAssignment` a method that receives a subject as an argument and returns `student.name has submitted a PR for {subject}`
         + `sprintChallenge` similar to PRAssignment but returns `student.name has begun sprint challenge on {subject}`
-*/
-class Student {
 
-}
+    Parent 
+    this.name = object.name;
+    this.age = object.age;
+    this.location = object.location;
+*/
+
+class Student extends Lambdasian {
+  constructor(attributes) {
+    super(attributes);
+    this.previousBackground = attributes.previousBackground;
+    this.className = attributes.className;
+    this.favSubjects = attributes.favSubjects;
+   
+   
+  }
+
+    //  + `listSubjects` a method that returns all of the student's favSubjects in a single string: `Loving HTML, CSS, JS!`.
+    // AssertionError: expected 'Loving function toString() { [native code] }' to include 'JS'
+    listSubjects () {
+      return `Loving toString(${this.favSubjects})`
+    }
+     // + `PRAssignment` a method that receives a subject as an argument and returns `student.name has submitted a PR for {subject}`
+    //  AssertionError: object tested must be an array, a map, an object, a set, a string, or a weakset, but undefined given
+    // AssertionError: expected 'Matt has submitted a PR for JS' to include 'sql'
+    PRAssignment (subject) {
+      subject = this.favSubjects[0];
+      return `${this.name} has submitted a PR for ${subject}`
+    }
+    
+    // AssertionError: object tested must be an array, a map, an object, a set, a string, or a weakset, but undefined given
+    sprintChallenge (subject) {
+      return `${this.name} has begun sprint challenge on ${subject}`
+    }
+
+} // end class Student extends
+
+const studentOne = new Student ({
+  name: 'Cindy',
+  age: 36,
+  location: 'Portland',
+  previousBackground: 'travel writer',
+  className: 'CS123',
+  favSubjects: ['HTML', 'CSS', 'JS']
+  
+});
+
+console.log(studentOne.listSubjects());
+console.log(studentOne.PRAssignment('Math'));
+console.log(studentOne.sprintChallenge('React'));
+
 
 /*
   TASK 6
@@ -271,9 +321,40 @@ class Student {
         + `standUp` a method that takes in a slack channel and returns `{name} announces to {channel}, @channel standy times!`
         + `debugsCode` a method that takes in a student object and a subject and returns `{name} debugs {student.name}'s code on {subject}`
 */
-class ProjectManager {
+class ProjectManager extends Instructor {
+  constructor(a) {
+    super(a)
+    this.gradClassName = a.gradClassName
+    this.favInstructor = a.favInstructor
+  }
 
-}
+  standUp(channel) {
+    return `${this.name} announces to ${channel}, @${channel} standy times!`
+  }
+
+  debugsCode(student, subject) {
+    subject = studentOne.favSubjects[2];
+    return `${this.name} debugs ${studentOne.name}'s code on ${subject}`
+  }
+
+
+} // class PM end
+
+const projectManagerOne = new ProjectManager ({
+  name: 'Cyrus',
+  age: 44,
+  location: 'Brooklyn',
+  specialty: 'Wrike',
+  favLanguage: 'English',
+  catchPhrase: 'Catch a bee with  honey',
+  gradClassName: 'CS1',
+  favInstructor: 'Sean'
+
+});
+
+
+console.log(projectManagerOne.standUp("Web32"));
+console.log(projectManagerOne.debugsCode());
 
 /*
   STRETCH PROBLEM (no tests!)
@@ -287,6 +368,7 @@ class ProjectManager {
 ///////// END OF CHALLENGE /////////
 ///////// END OF CHALLENGE /////////
 ///////// END OF CHALLENGE /////////
+
 if (typeof exports !== 'undefined') {
   module.exports = module.exports || {}
   if (Airplane) { module.exports.Airplane = Airplane }
