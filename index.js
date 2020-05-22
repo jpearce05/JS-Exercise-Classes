@@ -222,7 +222,7 @@ class Instructor extends Lambdasian {
   }
 
   grade(student, subject) {
-    return `${student} receives a perfect score on ${subject}`
+    return `${student.name} receives a perfect score on ${subject}`
   }
 
 } // end of class Instructor extends
@@ -281,31 +281,35 @@ class Student extends Lambdasian {
      // + `PRAssignment` a method that receives a subject as an argument and returns `student.name has submitted a PR for {subject}`
     //  AssertionError: object tested must be an array, a map, an object, a set, a string, or a weakset, but undefined given
     // AssertionError: expected 'Matt has submitted a PR for JS' to include 'sql'
+    // AssertionError: expected 'Matt has submitted a PR for JS' to include 'sql'
+
     PRAssignment (subject) {
-      subject = this.favSubjects[0];
-      return `${this.name} has submitted a PR for ${subject}`
+      // subject = this.favSubjects[0];
+      return `${this.name} has submitted a PR for ${subject}`;
+      console.log(subject);
+      console.log(this);
     }
     
     // AssertionError: object tested must be an array, a map, an object, a set, a string, or a weakset, but undefined given
     sprintChallenge (subject) {
-      return `${this.name} has begun sprint challenge on ${subject}`
+      return `${this.name} has begun sprint challenge on ${subject}`;
     }
 
 } // end class Student extends
 
 const studentOne = new Student ({
-  name: 'Cindy',
+  name: 'Matt',
   age: 36,
   location: 'Portland',
   previousBackground: 'travel writer',
   className: 'CS123',
-  favSubjects: ['HTML', 'CSS', 'JS']
+  favSubjects: ['sql', 'CSS', 'JS']
   
 });
 
 console.log(studentOne.listSubjects());
 console.log(studentOne.PRAssignment('Math'));
-console.log(studentOne.sprintChallenge('React'));
+console.log(studentOne.sprintChallenge('sql'));
 
 
 /*
@@ -328,13 +332,15 @@ class ProjectManager extends Instructor {
     this.favInstructor = a.favInstructor
   }
 
+  // AssertionError: expected '[object Object] receives a perfect score on redux' to include 'petar'
+
   standUp(channel) {
     return `${this.name} announces to ${channel}, @${channel} standy times!`
   }
 
   debugsCode(student, subject) {
-    subject = studentOne.favSubjects[2];
-    return `${this.name} debugs ${studentOne.name}'s code on ${subject}`
+    // subject = studentOne.favSubjects[2];
+    return `${this.name} debugs ${student.name}'s code on ${subject}`
   }
 
 
@@ -354,7 +360,7 @@ const projectManagerOne = new ProjectManager ({
 
 
 console.log(projectManagerOne.standUp("Web32"));
-console.log(projectManagerOne.debugsCode());
+console.log(projectManagerOne.debugsCode(studentOne, 'React'));
 
 /*
   STRETCH PROBLEM (no tests!)
