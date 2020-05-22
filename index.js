@@ -118,13 +118,14 @@ class Car {
   }
 
   drive(distance) {
-    if (this.tank >= distance / this.milesPerGallon) {
+    let maxDistance = this.tank * this.milesPerGallon;
+    if (distance < maxDistance){
       this.odometer += distance;
-    } else {
-      let possibleMiles = this.milesPerGallon * this.tank;
-      distance = distance - possibleMiles;
-      this.odomoter = this.odomoter + distance;
-      return `I ran out of fuel at ${this.odometer} miles!`;
+      this.tank -= distance/this.milesPerGallon;
+    } else if (distance >= maxDistance){
+      this.odometer += maxDistance;
+      this.tank -= maxDistance / this.milesPerGallon;
+      return `I ran out of fuel at ${this.odometer} miles!`
     }
 
   }
@@ -137,6 +138,20 @@ carOne.drive(20);
 // console.log(carOne);
 // console.log(carOne.fill);
 // console.log(carOne.drive);
+
+
+// drive 1st attempt
+
+// drive(distance) {
+//   if (this.tank >= distance / this.milesPerGallon) {
+//     this.odometer += distance;
+//   } else {
+//     let possibleMiles = this.milesPerGallon * this.tank;
+//     distance = distance - possibleMiles;
+//     this.odomoter = this.odomoter + distance;
+//     return `I ran out of fuel at ${this.odometer} miles!`;
+
+
 
 
 /*
